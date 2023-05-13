@@ -1,8 +1,8 @@
 import express, { type Express } from 'express'
 import type * as http from 'http'
 import { type AddressInfo } from 'net'
-import { type Logger } from '../domain/logger'
-import { type Config } from '../domain/config'
+import { type Logger } from '../contexts/shared/domain/logger'
+import { type Config } from '../contexts/shared/domain/config'
 
 export class Server {
   express: Express

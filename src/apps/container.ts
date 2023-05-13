@@ -1,6 +1,6 @@
 import { createContainer, type AwilixContainer, InjectionMode, asClass, asValue } from 'awilix'
-import { ConsoleLogger } from './console-loger'
-import { config } from './config-loader'
+import { ConsoleLogger } from '../contexts/shared/infrastructure/console-loger'
+import { config } from '../contexts/shared/infrastructure/config-loader'
 import { Server } from './server'
 
 export class Container {

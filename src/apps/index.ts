@@ -1,6 +1,6 @@
 import { type Logger } from '../contexts/shared/domain/logger'
-import { Container } from '../contexts/shared/infrastructure/container'
-import { type Server } from '../contexts/shared/infrastructure/server'
+import { Container } from './container'
+import { type Server } from './server'
 
 const container = new Container()
 const server = container.get<Server>('server')
