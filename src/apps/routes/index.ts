@@ -12,8 +12,8 @@ async function register (routePath: string, router: Router): Promise<void> {
   const route = await import(routePath).catch(() => {
     console.error(`error resolving route on path ${routePath}`)
   })
-  console.log(route)
   if (route == null || typeof route.register !== 'function') {
+    console.warn(`route ${routePath} doesnt have a register exported function`)
     return
   }
   route.register(router)
