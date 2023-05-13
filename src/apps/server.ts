@@ -1,8 +1,9 @@
-import express, { type Express } from 'express'
+import express, { Router, type Express } from 'express'
 import type * as http from 'http'
 import { type AddressInfo } from 'net'
 import { type Logger } from '../contexts/shared/domain/logger'
 import { type Config } from '../contexts/shared/domain/config'
+import { registerRoutes } from './routes'
 
 export class Server {
   express: Express
@@ -13,6 +14,9 @@ export class Server {
     private readonly logger: Logger
   ) {
     this.express = express()
+    const router = Router()
+    this.express.use(router)
+    registerRoutes(router)
   }
 
   async start (): Promise<void> {
