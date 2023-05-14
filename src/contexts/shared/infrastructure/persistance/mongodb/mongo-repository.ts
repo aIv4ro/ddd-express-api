@@ -1,5 +1,7 @@
-export class MongoRepository {
+import { type MongoClient } from 'mongodb'
+
+export abstract class MongoRepository {
   constructor (
-    private readonly client: any
+    protected readonly mongoClient: MongoClient
   ) {}
 }

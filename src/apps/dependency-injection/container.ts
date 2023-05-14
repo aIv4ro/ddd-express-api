@@ -25,6 +25,9 @@ export class Container {
         server: asClass(Server).singleton(),
         mongoClient: asValue(mongoClient)
       }).register({
+        // repositories
+      }).register({
+        // controllers
         statusGetController: asClass(StatusGetController).singleton(),
         registerController: asClass(RegisterController).singleton(),
         loginController: asClass(LoginController).singleton()

@@ -12,6 +12,7 @@ container
         process.exit(1)
       })
   })
-  .catch(() => {
+  .catch(err => {
     console.error('Error building container')
+    console.error(err)
   })
