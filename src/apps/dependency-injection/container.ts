@@ -6,6 +6,8 @@ import { StatusGetController } from '../controllers/status/status-get-controller
 import { LoginController } from '../controllers/auth/login-controller'
 import { RegisterController } from '../controllers/auth/register-controller'
 import { createMongoClient } from '../../contexts/shared/infrastructure/persistance/mongodb/mongo-client'
+import { MongoUserRepository } from '../../contexts/user/infrastructure/mongo-user-repository'
+import { type UserRepository } from '../../contexts/user/domain/user-repository'
 
 export class Container {
   private readonly container: AwilixContainer
@@ -26,6 +28,7 @@ export class Container {
         mongoClient: asValue(mongoClient)
       }).register({
         // repositories
+        userRepository: asClass<UserRepository>(MongoUserRepository).singleton()
       }).register({
         // controllers
         statusGetController: asClass(StatusGetController).singleton(),
