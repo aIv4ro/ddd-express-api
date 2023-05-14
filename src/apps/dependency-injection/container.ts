@@ -2,7 +2,9 @@ import { createContainer, type AwilixContainer, InjectionMode, asClass, asValue 
 import { ConsoleLogger } from '../../contexts/shared/infrastructure/console-loger'
 import { config } from '../../contexts/shared/infrastructure/config-loader'
 import { Server } from '../server'
-import { StatusGetController } from '../controllers/status-get-controller'
+import { StatusGetController } from '../controllers/status/status-get-controller'
+import { LoginController } from '../controllers/auth/login-controller'
+import { RegisterController } from '../controllers/auth/register-controller'
 
 export class Container {
   private readonly container: AwilixContainer
@@ -22,7 +24,9 @@ export class Container {
         server: asClass(Server).singleton()
       })
       .register({
-        statusGetController: asClass(StatusGetController).singleton()
+        statusGetController: asClass(StatusGetController).singleton(),
+        registerController: asClass(RegisterController).singleton(),
+        loginController: asClass(LoginController).singleton()
       })
   }
 
