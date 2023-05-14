@@ -1,7 +1,8 @@
 import { createContainer, type AwilixContainer, InjectionMode, asClass, asValue } from 'awilix'
-import { ConsoleLogger } from '../contexts/shared/infrastructure/console-loger'
-import { config } from '../contexts/shared/infrastructure/config-loader'
-import { Server } from './server'
+import { ConsoleLogger } from '../../contexts/shared/infrastructure/console-loger'
+import { config } from '../../contexts/shared/infrastructure/config-loader'
+import { Server } from '../server'
+import { StatusGetController } from '../controllers/status-get-controller'
 
 export class Container {
   private readonly container: AwilixContainer
@@ -19,6 +20,9 @@ export class Container {
         logger: asClass(ConsoleLogger).singleton(),
         config: asValue(config),
         server: asClass(Server).singleton()
+      })
+      .register({
+        statusGetController: asClass(StatusGetController).singleton()
       })
   }
 

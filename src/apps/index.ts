@@ -1,8 +1,7 @@
 import { type Logger } from '../contexts/shared/domain/logger'
-import { Container } from './container'
+import { container } from './dependency-injection'
 import { type Server } from './server'
 
-const container = new Container()
 const server = container.get<Server>('server')
 const logger = container.get<Logger>('logger')
 

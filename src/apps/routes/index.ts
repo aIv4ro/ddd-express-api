@@ -5,7 +5,7 @@ export function registerRoutes (router: Router): void {
   // eslint-disable-next-line n/no-path-concat
   const globPattern = __dirname.replace(/\\/gi, '/') + '/**/*.route.*'
   const routes = glob.sync(globPattern)
-  routes.map(async route => { await register(route, router).then() })
+  routes.map(route => register(route, router))
 }
 
 async function register (routePath: string, router: Router): Promise<void> {
