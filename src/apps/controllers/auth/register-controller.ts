@@ -6,7 +6,6 @@ export class RegisterController implements Controller {
   constructor (private readonly userRepository: UserRepository) {}
 
   async run (_req: Request, res: Response): Promise<void> {
-    const users = await this.userRepository.searchAll()
-    res.json({ message: 'Register not implemented', users })
+    res.json({ message: 'Register not implemented' })
   }
 }
