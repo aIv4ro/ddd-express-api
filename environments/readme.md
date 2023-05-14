@@ -11,4 +11,5 @@ prod # used for build
 - Create file `mode.env` in this folder, where mode is **dev or prod**
 ```bash
 PORT="8000" # default is 8080
+MONGO_URL="YOUR_MONGO_URL" # required
 ```

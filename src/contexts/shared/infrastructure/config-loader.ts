@@ -7,6 +7,14 @@ dotenv.config({
   path: `environments/${nodeEnv}.env`
 })
 
+const { PORT, MONGO_URL } = process.env
+
+if (MONGO_URL == null) {
+  console.error('bad env config: MONGO_URL is required')
+  process.exit(1)
+}
+
 export const config: Config = {
-  port: process.env.PORT ?? 8080
+  port: PORT ?? 8080,
+  mongoUrl: MONGO_URL
 }
