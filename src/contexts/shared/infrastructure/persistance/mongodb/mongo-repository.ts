@@ -9,10 +9,11 @@ export abstract class MongoRepository<T extends AggregateRoot> {
 
   protected abstract collectionName (): string
   protected get collection (): Collection { return this.mongoClient.db().collection(this.collectionName()) }
-  protected abstract findById (id: ObjectId): Promise<Nullable<T>>
+  public abstract findById (id: ObjectId): Promise<Nullable<T>>
 
-  protected async create (aggregate: T): Promise<Nullable<ObjectId>> {
-    const { insertedId } = await this.collection.insertOne(aggregate.toPrimitives())
+  protected async create (id: ObjectId, aggregate: T): Promise<Nullable<ObjectId>> {
+    const doc = { ...aggregate.toPrimitives(), _id: id, id: undefined }
+    const { insertedId } = await this.collection.insertOne(doc)
     return insertedId
   }
 

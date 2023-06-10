@@ -13,13 +13,18 @@ interface UserCollection {
 export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
   protected collectionName (): string { return 'users' }
 
-  protected async findById (id: ObjectId): Promise<Nullable<User>> {
+  public async findById (id: ObjectId): Promise<Nullable<User>> {
     const document = await this.collection.findOne<UserCollection>({ _id: id })
     return document != null ? new User(document._id, document.username, document.password) : null
   }
 
+  public async findByUsername (username: string): Promise<Nullable<User>> {
+    const document = await this.collection.findOne<UserCollection>({ username })
+    return document != null ? new User(document._id, document.username, document.password) : null
+  }
+
   async save (user: User): Promise<void> {
-    this.create(user).catch(err => {
+    this.create(user.id, user).catch(err => {
       throw err
     })
   }
