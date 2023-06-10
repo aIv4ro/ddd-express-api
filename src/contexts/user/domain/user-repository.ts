@@ -1,6 +1,6 @@
 import { type User } from './user'
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface UserRepository {
-  save: (user: Omit<User, 'id'>) => Promise<void>
-  searchAll: () => Promise<User[]>
+  save: (user: User) => Promise<void>
 }
