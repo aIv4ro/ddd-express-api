@@ -16,6 +16,7 @@ export class Server {
     this.express = express()
     const router = Router()
     this.express.use(router)
+    router.use(express.json())
     registerRoutes(router)
   }
 
