@@ -1,6 +1,6 @@
 import { type User } from './user'
 
 export interface UserRepository {
-  save: (user: User) => Promise<void>
+  save: (user: Omit<User, 'id'>) => Promise<void>
   searchAll: () => Promise<User[]>
 }

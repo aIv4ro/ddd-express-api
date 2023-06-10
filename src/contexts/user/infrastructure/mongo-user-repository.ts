@@ -2,12 +2,16 @@ import { MongoRepository } from '../../shared/infrastructure/persistance/mongodb
 import { type User } from '../domain/user'
 import { type UserRepository } from '../domain/user-repository'
 
-export class MongoUserRepository extends MongoRepository implements UserRepository {
-  async save (user: User): Promise<void> {
-    console.log(`save user ${user.username}`)
+export class MongoUserRepository extends MongoRepository<User> implements UserRepository {
+  protected collectionName (): string {
+    return 'users'
+  }
+
+  async save (user: Omit<User, 'id'>): Promise<void> {
+    await this.create(user)
   }
 
   async searchAll (): Promise<User[]> {
-    return []
+    return await this.collection.find<User>({}).toArray()
   }
 }
