@@ -3,6 +3,7 @@ import { type Nullable } from '../../shared/domain/nullable'
 import { MongoRepository } from '../../shared/infrastructure/persistance/mongodb/mongo-repository'
 import { User } from '../domain/user'
 import { type UserRepository } from '../domain/user-repository'
+import { UniqueKeyException } from '../../shared/domain/exceptions/unique-key-exception'
 
 interface UserCollection {
   _id: ObjectId
@@ -24,8 +25,11 @@ export class MongoUserRepository extends MongoRepository<User> implements UserRe
   }
 
   async save (user: User): Promise<void> {
-    this.create(user.id, user).catch(err => {
-      throw err
-    })
+    const isUsernameInUse = await this.findByUsername(user.username).then(res => res != null)
+    if (isUsernameInUse) {
+      throw new UniqueKeyException(`Username ${user.username} is already in use`, 'username')
+    }
+    await this.create(user.id, user)
+      .catch(err => { throw err })
   }
 }
