@@ -8,6 +8,7 @@ import { RegisterController } from '../controllers/auth/register-controller'
 import { createMongoClient } from '../../contexts/shared/infrastructure/persistance/mongodb/mongo-client'
 import { MongoUserRepository } from '../../contexts/user/infrastructure/mongo-user-repository'
 import { type UserRepository } from '../../contexts/user/domain/user-repository'
+import { JWTokenService } from '../../contexts/shared/infrastructure/jw-token-service'
 
 export class Container {
   private readonly container: AwilixContainer
@@ -25,7 +26,8 @@ export class Container {
         logger: asClass(ConsoleLogger).singleton(),
         config: asValue(config),
         server: asClass(Server).singleton(),
-        mongoClient: asValue(mongoClient)
+        mongoClient: asValue(mongoClient),
+        tokenService: asClass(JWTokenService)
       }).register({
         // repositories
         userRepository: asClass<UserRepository>(MongoUserRepository).singleton()

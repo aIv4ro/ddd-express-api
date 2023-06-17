@@ -12,4 +12,5 @@ prod # used for build
 ```bash
 PORT="8000" # default is 8080
 MONGO_URL="YOUR_MONGO_URL" # required
+JWT_PRIVATE_KEY="A_SUPER_SECRET_KEY" # required
 ```

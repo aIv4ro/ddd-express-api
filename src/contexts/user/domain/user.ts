@@ -33,6 +33,6 @@ export class User extends AggregateRoot {
   }
 
   toPrimitives (): Record<string, any> {
-    return { id: this.id, username: this.username, password: this.password }
+    return { id: this.id.toString(), username: this.username, password: this.password }
   }
 }
