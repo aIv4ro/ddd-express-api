@@ -10,7 +10,7 @@ export class JWTokenService implements TokenService {
   ) {}
 
   encode (data: any): string {
-    return this.jwt.sign(data, this.config.mongoUrl)
+    return this.jwt.sign(data, this.config.jwtPrivateKey)
   }
 
   decode (token: string): any {
