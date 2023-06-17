@@ -9,6 +9,8 @@ import { createMongoClient } from '../../contexts/shared/infrastructure/persista
 import { MongoUserRepository } from '../../contexts/user/infrastructure/mongo-user-repository'
 import { type UserRepository } from '../../contexts/user/domain/user-repository'
 import { JWTokenService } from '../../contexts/shared/infrastructure/jw-token-service'
+import { AuthMiddleware } from '../middlewares/auth-middleware'
+import { ValidateTokenController } from '../controllers/auth/validate-token-controller'
 
 export class Container {
   private readonly container: AwilixContainer
@@ -32,10 +34,14 @@ export class Container {
         // repositories
         userRepository: asClass<UserRepository>(MongoUserRepository).singleton()
       }).register({
+        // middleware
+        authMiddleware: asClass(AuthMiddleware).singleton()
+      }).register({
         // controllers
         statusGetController: asClass(StatusGetController).singleton(),
         registerController: asClass(RegisterController).singleton(),
-        loginController: asClass(LoginController).singleton()
+        loginController: asClass(LoginController).singleton(),
+        validateTokenController: asClass(ValidateTokenController).singleton()
       })
   }
 

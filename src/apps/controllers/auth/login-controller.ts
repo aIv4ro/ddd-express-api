@@ -17,7 +17,8 @@ export class LoginController implements Controller {
       res.status(httpStatus.FORBIDDEN).json({ message: 'bad credentials' })
       return
     }
-    const token = this.tokenService.encode(user.toPrimitives())
-    res.json({ token, user: { ...user, password: undefined } })
+    const userPrimitives = { ...user.toPrimitives(), password: undefined }
+    const token = this.tokenService.encode(userPrimitives)
+    res.json({ token, user: userPrimitives })
   }
 }
